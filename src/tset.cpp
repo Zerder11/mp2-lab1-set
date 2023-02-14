@@ -4,7 +4,7 @@
 // Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Множество - реализация через битовые поля
-#include  "tset.h"
+#include "tset.h"
 TSet::TSet(int mp) : BitField(mp), MaxPower(mp) {}
 // конструктор копирования
 TSet::TSet(const TSet& s) : BitField(s.BitField), MaxPower(s.MaxPower) {}

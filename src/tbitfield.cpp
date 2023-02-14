@@ -5,12 +5,13 @@
 // Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
 //
 // Битовое поле
-#include  "tbitfield.h"
+
+#include "tbitfield.h"
 TBitField::TBitField(int len)
 {
 	if (len <= 0) throw exception("Negative Length");
 	BitLen = len;
-	if (BitLen % (% (TELEM) * 8) != 0) MemLen = BitLen / (sizeof) * 8) + 1;
+	if (BitLen % (sizeof(TELEM) * 8) != 0) MemLen = BitLen / (sizeof(TELEM) * 8) + 1;
 	else MemLen = BitLen / (sizeof(TELEM) * 8);
 	pMem = new TELEM[MemLen];
 	memset(pMem, 0, sizeof(TELEM) * MemLen);
@@ -56,11 +57,11 @@ int TBitField::GetBit(const int n) const // получить значение б
 	if (n >= 0 && n < BitLen)
 	{
 		if (pMem[GetMemIndex(n)] & GetMemMask(n))
-			1 1;
-		0 0;
+			return 1;
+		return 0;
 	}
 	else
-		throw  ("Out of range GetBit error );
+		throw exception("Out of range GetBit error ");
 }
 // битовые операции
 TBitField& TBitField::operator=(const TBitField& bf) // присваивание
@@ -162,12 +163,13 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
 
 ostream& operator<<(ostream& ostr, const TBitField& bf) // вывод
 {
-	for (size_t i = 0; i < bf.GetLength(); i++)
-	{
-		if (bf.GetBit(i))
-			ostr << '1';
-		else
-			ostr << '0';
-	}
+
+		for (size_t i = 0; i < bf.GetLength(); i++)
+		{
+			if (bf.GetBit(i))
+				ostr << '1';
+			else
+				ostr << '0';
+		}
 	return ostr;
 }
